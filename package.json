@@ -1,0 +1,14 @@
+{
+  "name": "12-motion",
+  "version": "1.0.0",
+  "description": "clone coding project",
+  "main": "index.js",
+  "author": "HyunSJ <dudtod1596@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.7"
+  }
+}
