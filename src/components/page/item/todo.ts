@@ -7,14 +7,10 @@ export class TodoComponent extends BaseComponent<HTMLElement> {
                 <input type="checkbox" class="todo-checkbox">
             </section>`);
 
-    const titleElement = this.element.querySelector(
-      ".todo__title"
-    )! as HTMLHeadingElement;
+    const titleElement = this.element.querySelector(".todo__title")! as HTMLHeadingElement;
     titleElement.textContent = title;
 
-    const todoElement = this.element.querySelector(
-      ".todo-checkbox"
-    )! as HTMLInputElement;
+    const todoElement = this.element.querySelector(".todo-checkbox")! as HTMLInputElement;
     todoElement.insertAdjacentText("afterend", todo);
   }
 }

@@ -9,14 +9,10 @@ export class VideoComponent extends BaseComponent<HTMLElement> {
                 </div>
             </section>`);
 
-    const iframe = this.element.querySelector(
-      ".video__iframe"
-    )! as HTMLIFrameElement;
+    const iframe = this.element.querySelector(".video__iframe")! as HTMLIFrameElement;
     iframe.src = this.convertToEmbeddedURL(url);
 
-    const titleElement = this.element.querySelector(
-      ".video__title"
-    )! as HTMLHeadingElement;
+    const titleElement = this.element.querySelector(".video__title")! as HTMLHeadingElement;
     titleElement.textContent = title;
   }
   private convertToEmbeddedURL(url: string): string {
