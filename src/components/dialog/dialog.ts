@@ -3,7 +3,7 @@ import { Composable } from "../page/page.js";
 
 type OnCloseListener = () => void;
 type OnSubmitListener = () => void;
-
+// 자체적으로 행동하지 않고 외부에서 행동을 주입받아 행동
 export class InputDialog extends BaseComponent<HTMLElement> implements Composable {
   closeListener?: OnCloseListener;
   submitListener?: OnSubmitListener;
@@ -42,6 +42,7 @@ export class InputDialog extends BaseComponent<HTMLElement> implements Composabl
   }
 
   addChild(child: Component) {
+    // 무엇을 보여줄 지 외부에서 사용자가 결정가능
     const body = this.element.querySelector("#dialog__body")! as HTMLElement;
     child.attachTo(body);
   }

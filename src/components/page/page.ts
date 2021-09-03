@@ -2,6 +2,7 @@ import { BaseComponent, Component } from "../component.js";
 
 type OnCloseListener = () => void;
 
+//container의 개념
 export interface Composable {
   addChild(child: Component): void;
 }
