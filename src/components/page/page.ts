@@ -1,4 +1,8 @@
 import { BaseComponent, Component } from "../component.js";
+//@deco
+import { Hoverable, Droppable } from "./../common/type";
+import { EnableDragging, EnableDrop, EnableHover } from "../../decorators/draggable.js";
+import { Draggable } from "../common/type.js";
 
 type OnCloseListener = () => void;
 type DragState = "start" | "stop" | "enter" | "leave";
@@ -15,7 +19,9 @@ type SectionContainerConstructor = {
   new (): SectionContainer;
 };
 
-interface SectionContainer extends Component, Composable {
+// interface SectionContainer extends Component, Composable {
+//@deco
+interface SectionContainer extends Component, Composable, Draggable, Hoverable {
   //의존성 주입
   setOnCloseListener(listener: OnCloseListener): void;
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
@@ -24,6 +30,8 @@ interface SectionContainer extends Component, Composable {
   onDropped(): void;
 }
 
+@EnableDragging
+@EnableHover
 export class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer {
   private closeListener?: OnCloseListener;
   private dragStateListener?: OnDragStateListener<PageItemComponent>;
@@ -40,18 +48,19 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener();
     };
-    this.element.addEventListener("dragstart", (event: DragEvent) => {
-      this.onDragStart(event);
-    });
-    this.element.addEventListener("dragend", (event: DragEvent) => {
-      this.onDragEnd(event);
-    });
-    this.element.addEventListener("dragenter", (event: DragEvent) => {
-      this.onDragEnter(event);
-    });
-    this.element.addEventListener("dragleave", (event: DragEvent) => {
-      this.onDragLeave(event);
-    });
+    //@deco
+    // this.element.addEventListener("dragstart", (event: DragEvent) => {
+    //   this.onDragStart(event);
+    // });
+    // this.element.addEventListener("dragend", (event: DragEvent) => {
+    //   this.onDragEnd(event);
+    // });
+    // this.element.addEventListener("dragenter", (event: DragEvent) => {
+    //   this.onDragEnter(event);
+    // });
+    // this.element.addEventListener("dragleave", (event: DragEvent) => {
+    //   this.onDragLeave(event);
+    // });
   }
 
   onDragStart(_: DragEvent) {
@@ -98,26 +107,34 @@ export class PageItemComponent extends BaseComponent<HTMLElement> implements Sec
   }
 }
 
-export class PageComponet extends BaseComponent<HTMLUListElement> implements Composable {
+// export class PageComponet extends BaseComponent<HTMLUListElement> implements Composable {
+@EnableDrop
+export class PageComponet extends BaseComponent<HTMLUListElement> implements Composable, Droppable {
   private children = new Set<SectionContainer>();
   private dropTarget?: SectionContainer;
   private dragTarget?: SectionContainer;
   constructor(private pageItemConstructor: SectionContainerConstructor) {
     super('<ul class="page"></ul>');
-    this.element.addEventListener("dragover", (event: DragEvent) => {
-      this.onDragOver(event);
-    });
-    this.element.addEventListener("drop", (event: DragEvent) => {
-      this.onDrop(event);
-    });
+    //@deco
+    // this.element.addEventListener("dragover", (event: DragEvent) => {
+    //   this.onDragOver(event);
+    // });
+    // this.element.addEventListener("drop", (event: DragEvent) => {
+    //   this.onDrop(event);
+    // });
   }
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-    console.log("onDragOver");
-  }
+  //@deco
+  // onDragOver(event: DragEvent) {
+  //   event.preventDefault();
+  //   console.log("onDragOver");
+  // }
+  //@deco
+  onDragOver(_: DragEvent): void {}
+
   onDrop(event: DragEvent) {
-    event.preventDefault();
-    console.log("onDrop");
+    //@deco
+    // event.preventDefault();
+    // console.log("onDrop");
     if (!this.dropTarget) {
       return;
     }
